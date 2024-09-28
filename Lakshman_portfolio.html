@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>lakshmanarao-kodela - Professional Portfolio</title>
+        <style>
+            /* Base styles */
+            :root {
+                --primary-color: #2c3e50;
+                --secondary-color: #3498db;
+                --accent-color: #e74c3c;
+                --background-color: #ecf0f1;
+                --text-color: #34495e;
+            }
+            body,
+            html {
+                margin: 0;
+                padding: 0;
+                font-family: "Roboto", sans-serif;
+                background-color: var(--background-color);
+                color: var(--text-color);
+                scroll-behavior: smooth;
+            }
+            /* Header styles */
+            header {
+                background-color: var(--primary-color);
+                color: white;
+                padding: 20px 0;
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1000;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease;
+            }
+            header.scrolled {
+                padding: 10px 0;
+                background-color: rgba(44, 62, 80, 0.9);
+            }
+            .header-content {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+            .profile-header {
+                display: flex;
+                align-items: center;
+            }
+            .profile-img {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 3px solid var(--secondary-color);
+                margin-right: 15px;
+                transition: transform 0.3s ease;
+            }
+            .profile-img:hover {
+                transform: scale(1.1);
+            }
+            .profile-name {
+                font-size: 1.5em;
+                margin: 0;
+            }
+            .profile-title {
+                font-size: 0.9em;
+                opacity: 0.8;
+            }
+            /* Navigation */
+            nav ul {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+                display: flex;
+            }
+            nav ul li {
+                margin-left: 20px;
+            }
+            nav ul li a {
+                color: white;
+                text-decoration: none;
+                transition: color 0.3s ease;
+                font-weight: 500;
+                position: relative;
+            }
+            nav ul li a::after {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 2px;
+                bottom: -5px;
+                left: 0;
+                background-color: var(--secondary-color);
+                transform: scaleX(0);
+                transition: transform 0.3s ease;
+            }
+            nav ul li a:hover::after {
+                transform: scaleX(1);
+            }
+            /* Main content */
+            .content {
+                padding: 120px 20px 80px;
+                max-width: 1200px;
+                margin: 0 auto;
+                opacity: 0;
+                transition: opacity 0.5s ease;
+            }
+            /* Section styles */
+            .section {
+                background-color: white;
+                border-radius: 8px;
+                padding: 40px;
+                margin-bottom: 30px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease;
+            }
+            .section:hover {
+                transform: translateY(-5px);
+            }
+            .section h2 {
+                color: var(--primary-color);
+                border-bottom: 2px solid var(--secondary-color);
+                padding-bottom: 10px;
+                margin-bottom: 20px;
+                display: inline-block;
+            }
+            /* Home page specific styles */
+            .hero {
+                text-align: center;
+                padding: 60px 0;
+                background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+                color: white;
+                border-radius: 8px;
+                margin-bottom: 30px;
+            }
+            .hero h1 {
+                font-size: 2.5em;
+                margin-bottom: 20px;
+            }
+            .hero p {
+                font-size: 1.2em;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            .cta-button {
+                display: inline-block;
+                padding: 12px 24px;
+                background-color: var(--accent-color);
+                color: white;
+                text-decoration: none;
+                border-radius: 30px;
+                font-weight: bold;
+                margin-top: 20px;
+                transition: background-color 0.3s ease;
+            }
+            .cta-button:hover {
+                background-color: #c0392b;
+            }
+            .about-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+                margin-top: 30px;
+            }
+            .about-item {
+                background-color: #f9f9f9;
+                padding: 20px;
+                border-radius: 8px;
+                text-align: center;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .about-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            }
+            .about-item i {
+                font-size: 2.5em;
+                color: var(--secondary-color);
+                margin-bottom: 15px;
+            }
+            /* List styles */
+            .item-list {
+                list-style-type: none;
+                padding: 0;
+            }
+            .item-list li {
+                margin-bottom: 20px;
+                padding: 20px;
+                background-color: #f9f9f9;
+                border-radius: 8px;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .item-list li:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            }
+            /* Certificates and Achievements */
+            .cert-achieve-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            .cert-achieve-item {
+                background-color: #f9f9f9;
+                padding: 20px;
+                border-radius: 8px;
+                text-align: center;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .cert-achieve-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            }
+            .cert-achieve-item i {
+                font-size: 2.5em;
+                color: var(--accent-color);
+                margin-bottom: 15px;
+            }
+            /* Contact form */
+            form {
+                display: grid;
+                gap: 15px;
+            }
+            input,
+            textarea {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                transition: border-color 0.3s ease;
+            }
+            input:focus,
+            textarea:focus {
+                border-color: var(--secondary-color);
+                outline: none;
+            }
+            button {
+                padding: 12px 24px;
+                background-color: var(--secondary-color);
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+                font-weight: bold;
+            }
+            button:hover {
+                background-color: #2980b9;
+            }
+            /* Footer */
+            footer {
+                background-color: var(--primary-color);
+                color: white;
+                text-align: center;
+                padding: 20px 0;
+                margin-top: 50px;
+            }
+            .social-links {
+                margin-top: 15px;
+            }
+            .social-links a {
+                color: white;
+                font-size: 1.5em;
+                margin: 0 10px;
+                transition: color 0.3s ease;
+            }
+            .social-links a:hover {
+                color: var(--secondary-color);
+            }
+            .data-engineering-summary {
+                background-color: #f0f4f8;
+                border-left: 4px solid var(--secondary-color);
+                padding: 20px;
+                margin-bottom: 30px;
+                border-radius: 0 8px 8px 0;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .data-engineering-summary p {
+                margin: 0;
+                line-height: 1.6;
+                color: #333;
+            }
+            /* Adjust the about grid for better responsiveness */
+            .about-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+                margin-top: 30px;
+            }
+            .view-certificate {
+                background-color: var(--secondary-color);
+                color: white;
+                border: none;
+                padding: 10px 15px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+            .view-certificate:hover {
+                background-color: var(--primary-color);
+            }
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1000;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0, 0, 0, 0.4);
+            }
+            .modal-content {
+                background-color: #fefefe;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                max-width: 800px;
+                position: relative;
+            }
+            .close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+                cursor: pointer;
+                position: absolute;
+                top: 10px;
+                right: 20px;
+            }
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            #certificate-image {
+                width: 100%;
+                height: auto;
+            }
+            .error-message {
+                color: red;
+                font-size: 0.8em;
+                margin-top: 5px;
+                display: block;
+            }
+            .form-group {
+                margin-bottom: 1rem;
+                position: relative;
+            }
+            .form-group input:invalid,
+            .form-group input:invalid:focus {
+                border-color: red;
+            }
+            .contact-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start; /* Aligns items to the top */
+                padding: 10px 0;
+            }
+            .contact-list {
+                list-style-type: none; /* Removes bullet points */
+                padding: 0;
+                margin: 0;
+            }
+            .contact-list.left {
+                flex: 1;
+                display: flex;
+                flex-direction: column; /* Aligns email and phone vertically */
+                gap: 10px; /* Adds space between email and phone */
+            }
+            .contact-list.right {
+                flex: 1;
+                display: flex;
+                flex-direction: column; /* Aligns LinkedIn and GitHub vertically */
+                gap: 10px; /* Adds space between LinkedIn and GitHub */
+                align-items: flex-end; /* Aligns the items to the right */
+            }
+            .contact-list li {
+                display: flex;
+                align-items: center;
+            }
+            .contact-list li i {
+                margin-right: 10px; /* Adds space between icon and text */
+            }
+            .contact-container + .contact-container {
+                margin-top: 20px; /* Adds space between the two rows */
+            }
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+            .contact-section {
+                padding: 20px;
+            }
+            .contact-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                width: 100%;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 10px;
+                background-color: var(--primary-bg-color);
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+            .contact-list {
+                list-style: none;
+                padding: 0;
+            }
+            .contact-list li {
+                margin-bottom: 10px;
+                font-size: 1.2em;
+            }
+            .contact-list li i {
+                margin-right: 10px;
+                color: var(--primary-color);
+            }
+            .contact-list li a,
+            .contact-list li span {
+                color: var(--secondary-color);
+                text-decoration: none;
+            }
+            .contact-list li a:hover {
+                text-decoration: underline;
+            }
+            .left-contact {
+                flex: 1;
+                padding-right: 20px;
+            }
+            .right-contact {
+                flex: 1;
+                padding-left: 20px;
+            }
+            .header-content {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem;
+            }
+
+            /* New styles for responsive navigation */
+            .nav-menu {
+                display: flex;
+                list-style-type: none;
+            }
+
+            .nav-menu li {
+                margin-left: 1rem;
+            }
+
+            .hamburger {
+                display: none;
+                cursor: pointer;
+            }
+
+            @media screen and (max-width: 768px) {
+                .nav-menu {
+                    display: none;
+                    flex-direction: column;
+                    position: absolute;
+                    top: 60px;
+                    left: 0;
+                    width: 100%;
+                    background-color: var(--primary-color);
+                    padding: 1rem;
+                }
+
+                .nav-menu.active {
+                    display: flex;
+                }
+
+                .nav-menu li {
+                    margin: 0.5rem 0;
+                }
+
+                .hamburger {
+                    display: block;
+                }
+            }
+            @media (max-width: 768px) {
+                .contact-container {
+                    flex-direction: column;
+                    align-items: center;
+                }
+                .left-contact,
+                .right-contact {
+                    padding: 0;
+                    margin-bottom: 20px;
+                }
+            }
+            .contact-list li {
+                margin-bottom: 10px;
+                font-size: 1.2em;
+                font-weight: bold;
+            }
+            .contact-list li span,
+            .contact-list li a {
+                font-weight: normal;
+                font-size: 1.1em;
+            }
+            .button {
+                background-color: var(--primary-color);
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+            .button:hover {
+                background-color: var(--secondary-color);
+            }
+
+            /* Animations */
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .animate-fade-in {
+                animation: fadeIn 0.5s ease forwards;
+            }
+            .hero {
+             text-align: center;
+             padding: 60px 0 40px; /* Adjust the padding */
+             margin-top: 45px; /* Space between header and hero section */
+             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+             color: white;
+             border-radius: 8px;
+             margin-bottom: 30px;
+            }
+
+        </style>
+        <!-- Font Awesome for icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    </head>
+    <body>
+        <header id="main-header">
+            <div class="header-content">
+                <div class="profile-header">
+                    <img src="./Achievements/Achievement.png" alt="profile" id="profile-img" class="profile-img" />
+                    <div>
+                        <h1 id="profile-name" class="profile-name">Lakshmanarao Kodela</h1>
+                        <p>Data Engineering & Analytics</p>
+                    </div>
+                </div>
+
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="#" onclick="loadContent('home')">Home</a></li>
+                        <li><a href="#" onclick="loadContent('education')">Education</a></li>
+                        <li><a href="#" onclick="loadContent('experience')">Experience</a></li>
+                        <li><a href="#" onclick="loadContent('projects')">Projects</a></li>
+                        <li><a href="#" onclick="loadContent('certificates')">Certificates</a></li>
+                        <li><a href="#" onclick="loadContent('contact')">Contact</a></li>
+                    </ul>
+                    <div class="hamburger" onclick="toggleMenu()">
+                        <span>☰</span>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <div id="main-content" class="content">
+            <!-- Content will be dynamically loaded here -->
+        </div>
+        <footer>
+            <p>&copy; 2024 Lakshmanarao Kodela. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/lakshmanarao-kodela-066b39253" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/LakshmanaraoKodela" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+        </footer>
+        <script>
+            // Sample data (replace with your own)
+            const profile_Data = {
+                name: "Lakshmanarao Kodela",
+                title: "Data Engineer & Analytics",
+                image: "Achievements/my_pic.jpg", // Replace with your actual image URL
+                summary:
+                    "Innovative Data Engineer with 2+ years of experience in designing and implementing scalable data solutions. Expertise in big data technologies, cloud platforms, and advanced analytics. Passionate about leveraging data to drive business growth and operational efficiency.",
+                dataEngineeringSummary:
+                    "Aspiring Data Engineer with a strong background in designing and optimizing ETL processes, data pipelines, and conducting in-depth data analysis. Proficient in data modeling, schema design, trend analysis, and regression analysis to deliver actionable insights for business intelligence. Skilled in leveraging tools like Power BI and Incorta to transform complex datasets into meaningful insights and interactive dashboards. Expertise in SQL, Python, and cloud-based analytics for seamless data migration, integration, and optimization. Experienced in managing both batch and real-time data processing tasks to support dynamic, data-driven environments. Committed to continuous improvement and eager to leverage advanced machine learning and data analytics to drive innovation in industrial manufacturing.",
+                skills: {
+                    "Programming Languages": ["Python", "SQL"],
+                    "Data Tools & Platforms": ["Incorta", "Snowflake", "AWS S3", "Power BI", "Pandas", "Matplotlib", "Seaborn", "Pyspark", "Streamlit", "scikit-learn"],
+                    Databases: ["SQL Server", "MySQL", "PostgreSQL"],
+                    "Other Skills": ["ETL", "Data Warehousing", "Data Migration", "JSON APIs", "Data Visualization", "AI/ML (Basic)", "Data Cleansing"],
+                },
+                interests: ["Artificial Intelligence", "Machine Learning", "ETL", "Data Warehousing", "Data Governance & Security", "Big Data"],
+                languages: ["Telugu (Native)", "English (Fluent)", "Hindi (Intermediate)"],
+                contact: {
+                    email: "luckykodela7@gmail.com",
+                    phone: "+91 8985647097",
+                    linkedin: "https://www.linkedin.com/in/lakshmanarao-kodela-066b39253",
+                    github: "https://github.com/LakshmanaraoKodela",
+                },
+            };
+
+            const educationData = [
+                // { degree: "Master of Science in Artificial Intelligence", school: "Tech University", year: "2020-2022", description: "Focused on machine learning algorithms, neural networks, and natural language processing. Graduated with honors." },
+                {
+                    degree: "Bachelor of Science in Computer Science & Statistics",
+                    school: "Andhra University",
+                    college: "Maharajah's Autonomous College",
+                    year: "2019-2022",
+                    cgpa: 9.65,
+                    project: "Forkify - Restaurant Web Application",
+                    description:
+                        "Developed a restaurant web application utilizing HTML, CSS, and JavaScript, implementing a live server for smooth, dynamic interactions. The app integrates JSON APIs to manage and fetch real-time data. This solution ensures a responsive user interface and seamless data handling for enhanced user experience.",
+                },
+            ];
+
+            // const experienceData = [
+            //     { title: "Associate Software Engineer (Data Analytics)", company: "Feuji Software Solutions", period: "2022-Present", description: "Lead developer for AI-powered enterprise applications. Mentored junior developers and implemented best practices in agile development." },
+            //     // { title: "Full Stack Developer", company: "StartUp Innovations", period: "2020-2022", description: "Developed scalable web applications using React and Node.js. Integrated machine learning models to enhance user experience." }
+            // ];
+            const experienceData = [
+                // { title: "Associate Software Engineer (Data Analytics)", company: "Feuji Software Solutions", period: "2022-Present", description: "Lead developer for AI-powered enterprise applications. Mentored junior developers and implemented best practices in agile development." },
+                {
+                    title: "Associate Software Engineer (Data Analytics)",
+                    company: "Feuji Software Solutions",
+                    period: "2022-Present",
+                    description: `
+                  <strong>• </strong> Led a successful data migration project involving millions of records from SQL Server to Snowflake and AWS S3, ensuring zero downtime and seamless transition.
+                  <strong>• </strong> Designed and implemented ETL processes using Python, SQL, AWS, and Snowflake to optimize data workflows for finance and retail clients, improving efficiency and scalability.
+                  <strong>• </strong> Developed automated Python scripts to handle large-scale data processing, reducing manual effort and significantly improving processing speed.
+                  <strong>• </strong> Built real-time Power BI dashboards, providing stakeholders with actionable insights and enabling quicker, data-driven decision-making.
+                  <strong>• </strong> Collaborated with cross-functional teams and business stakeholders, ensuring smooth deployments, effective issue resolution, and alignment of data solutions with business goals.
+                  <strong>• </strong> Expert in impactful data visualizations and ETL optimization, proficient in data interpretation, statistical analysis, storytelling with data, and delivering high-quality, well-documented solutions.
+                  <strong>• </strong> Committed to continuous improvement and staying current with emerging technologies, enthusiastic about learning and applying new tools to stay ahead in the evolving tech field.
+         `,
+                },
+            ];
+
+            const projectsData = [
+                // { title: "AI-Driven Personal Finance Manager", description: "Developed an intelligent finance management app that uses machine learning to provide personalized savings and investment advice. Increased user savings by an average of 15%." },
+                {
+                    title: "Data Migration (Data Accelerator)",
+                    role: "Software Engineer(Data Analytics)",
+                    description:
+                        "Executed a strategic Data Migration Project, using Python, Pandas, SQL Server, and PostgreSQL. Successfully orchestrated the seamless transfer of the entire data from SQL Server to various data sources like S3, Snowflake and MySQL, ensuring uninterrupted business operations. Innovatively developed a Python automated script to optimize the migration process, contributing to increased efficiency and data reliability, thereby supporting enhanced business decision-making capabilities. ",
+                    technologies: "Python, Pandas, SQL Server, AWS S3, Snowflake",
+                    responsibilities: `<strong>• </strong> Analyzed business requirements, functional, and technical specifications for the data migration project to ensure alignment with organizational goals.
+                  <strong>• </strong> Developed and maintained Python scripts for data migration using Pandas and SQL, ensuring efficient and accurate data handling.
+                  <strong>• </strong> Designed and implemented data transformation workflows to guarantee data consistency across systems.
+                  <strong>• </strong> Optimized data migration processes by leveraging advanced SQL techniques and Python optimizations to enhance performance and reduce runtime.
+                  <strong>• </strong> Collaborated with cross-functional teams and business stakeholders, ensuring smooth deployments, effective issue resolution, and alignment of data solutions with business goals.
+                  <strong>• </strong> Conducted thorough quality assurance and testing procedures to ensure data accuracy and reliability throughout the migration process.
+                  <strong>• </strong> Monitored and reported on data migration progress, addressing potential risks and issues to minimize impact on project timelines.`,
+                },
+                {
+                    title: "PLZ Data Analysis and Reporting",
+                    role: "Software Engineer(Data Analytics)",
+                    description:
+                        "Led the development of dynamic dashboards using Power BI, integrating and cleaning data from multiple sources. Created actionable insights and KPIs, enhancing strategic decision-making and business performance. Optimized dashboards for performance and collaborated with cross-functional teams to deliver data-driven recommendations. ",
+                    technologies: "Power BI, AWS S3, SQL Server",
+                    responsibilities: `<strong>• </strong> Analyzed and interpreted business requirements to design and develop Power BI reports and dashboards.
+                              <strong>• </strong> Integrated data from SQL Server to Power BI, ensuring seamless data flow and consistency.
+                              <strong>• </strong> Developed complex DAX queries to create metrics and KPIs that drive business insights.
+                              <strong>• </strong> Optimized dashboards for performance and user experience, ensuring efficient data visualization and interaction.
+                              <strong>• </strong> Provided training and support to stakeholders on using Power BI dashboards and reports.
+                              <strong>• </strong> Collaborated with business analysts to refine data models and enhance reporting accuracy.
+                              <strong>• </strong> Monitored and maintained dashboard performance, addressing any issues or updates required to ensure continuous functionality and relevance.`,
+                },
+                {
+                    title: "Incorta Data Analytics",
+                    role: "Software Engineer (Data Analytics)",
+                    description:
+                        "Implemented a data analytics project using Incorta, enabling seamless data transformations and visualization creation. Integrated data from source systems, including AWS S3 and Snowflake. Connected Incorta to source systems, extracted, and loaded large datasets, ultimately building user-friendly dashboards for effective business analysis.",
+                    technologies: "Incorta, AWS S3, Snowflake, SQL",
+                    responsibilities: `<strong>• </strong> Analyzed business requirements, functional, and technical specifications to align data engineering processes with organizational objectives.
+                         <strong>• </strong> Conducted in-depth analysis of source data, implementing data cleansing procedures pre- and post-loading into Incorta to ensure data accuracy.
+                         <strong>• </strong> Integrated and optimized data from AWS S3 and Snowflake for seamless transformations and analysis within Incorta.
+                         <strong>• </strong> Developed schemas and business schemas in Incorta, providing a solid foundation for data analysis and reporting.
+                         <strong>• </strong> Designed and developed user-friendly dashboards aligned with business needs, delivering actionable insights for decision-making.
+                         <strong>• </strong> Collaborated with project teams and business users, troubleshooting issues post-deployment to ensure optimal performance.
+                         <strong>• </strong> Actively participated in production deployment, ensuring smooth transitions and minimal operational disruptions.`,
+                },
+                {
+                     title: "PDF Chatbot",
+                     role: "Software Engineer (Data Analytics)",
+                     description:
+                         "Developed an intelligent chatbot that interacts with users and provides responses based on the content of uploaded PDFs. Utilized NLP techniques to extract, interpret, and present information effectively. Enhanced user experience by implementing a dynamic and responsive UI for seamless interaction.",
+                     technologies: "Python, NLP, scikit-learn, Streamlit, PyPDF2",
+                      responsibilities: `<strong>• </strong> Designed and implemented a chatbot using NLP to process and respond to user queries based on PDF content.
+                      <strong>• </strong> Extracted and processed text from PDFs using Python libraries like PyPDF2 and integrated it with the chatbot for real-time interaction.
+                      <strong>• </strong> Employed scikit-learn and custom NLP models to analyze and interpret the extracted text, providing accurate and contextual responses.
+                      <strong>• </strong> Developed a user-friendly interface using Streamlit, enabling users to upload PDFs and interact with the chatbot seamlessly.
+                      <strong>• </strong> Implemented features to handle complex queries and provide detailed responses, enhancing user engagement and satisfaction.
+                      <strong>• </strong> Tested and optimized the chatbot for performance and accuracy, ensuring robust and efficient operation across various use cases.
+                      <strong>• </strong> Collaborated with team members to integrate additional functionalities and improve the overall user experience and capabilities of the chatbot.`
+}
+
+
+                //  { title: "Blockchain-based Supply Chain System", description: "Created a decentralized supply chain management system using Ethereum smart contracts, improving traceability and reducing fraud by 30%." },
+            ];
+
+            const certificatesData = [
+                { title: "Hands-On-Essentials: Data Engineering Workshop", issuer: "Snowflake", year: "2024", imageUrl: "Achievements/snowflake_data_engineer.png" },
+                { title: "Hands-On-Essentials: Data Lake Warehouse", issuer: "Snowflake", year: "2024", imageUrl: "Achievements/snowflake_data_warehouse.png" },
+                { title: "Analyzing and Visualizing Data in Looker", issuer: "Google", year: "2023", imageUrl: "Achievements/Looker_cerificate.png" },
+                { title: "Incorta 5 Essentials technical cerifications", issuer: "Incorta", year: "2023", imageUrl: "Achievements/Encorta 5 Essentials_certificate.jpg" },
+                { title: "Machine Learning cerification", issuer: "LinkedIn", year: "2024", imageUrl: "Achievements/CertificateOfCompletion_Machine Learning with ScikitLearn_page-0001.jpg" },
+            ];
+
+            const achievementsData = [
+                { title: "Academic Excellence Award – College Topper", description: "Achieved highest grade in my program, reflecting exceptional academic performance", year: "2022", imageUrl: "Achievements/Achievement.png" },
+                //  { title: "1st Place, Global AI Hackathon", description: "Led a team to victory with an innovative AI solution for sustainable urban planning.", year: "2023", imageUrl: "/api/placeholder/800/600" },
+                {
+                    title: "Appreciation: Certificate of Excellence",
+                    description: "Received Best Employee Appreciation for excellence in performance and contributions to team success.",
+                    year: "2022",
+                    imageUrl: "Achievements/Appreciation.jpg",
+                },
+            ];
+
+            function loadContent(page) {
+                const content = document.getElementById("main-content");
+                content.style.opacity = 0;
+
+                setTimeout(() => {
+                    switch (page) {
+                        case "home":
+                            content.innerHTML = `
+                  <div class="hero animate-fade-in">
+                      <h1>Welcome to My Portfolio</h1>
+                      <p>${profile_Data.summary}</p>
+                      <a href="#" class="cta-button" onclick="loadContent('contact')">Get in Touch</a>
+                  </div>
+                  <div class="section animate-fade-in">
+                      <h2>About Me</h2>
+                      <div class="data-engineering-summary">
+                          <p>${profile_Data.dataEngineeringSummary}</p>
+                      </div>
+                      <div class="about-grid">
+                          <div class="about-item">
+                              <i class="fas fa-laptop-code"></i>
+                              <h3>Skills</h3>
+                              ${Object.entries(profile_Data.skills)
+                                  .map(
+                                      ([category, skills]) => `
+                                  <p style="text-align: left;"><strong>${category}:</strong> ${skills.join(", ")}</p>
+
+                              `
+                                  )
+                                  .join("")}
+                          </div>
+                          <div class="about-item">
+                              <i class="fas fa-lightbulb"></i>
+                              <h3>Interests</h3>
+                              <p>${profile_Data.interests.join(", ")}</p>
+                          </div>
+                          <div class="about-item">
+                              <i class="fas fa-globe"></i>
+                              <h3>Languages</h3>
+                              <p>${profile_Data.languages.join(", ")}</p>
+                          </div>
+                      </div>
+                  </div>
+              `;
+                            break;
+                        case "education":
+                            content.innerHTML = `
+                          <div class="section animate-fade-in">
+                              <h2>Education</h2>
+                              <ul class="item-list">
+                                  ${educationData
+                                      .map(
+                                          (edu) => `
+                                      <li>
+                                          <h3>${edu.degree}</h3>
+                                          <p><strong>${edu.school}, ${edu.year}</strong></p>
+                                          <p><strong>${edu.college}</strong></p>
+                                           <p><strong>cgpa : </strong>${edu.cgpa}</p>
+                                          <p>${edu.description}</p>
+                                      </li>
+                                  `
+                                      )
+                                      .join("")}
+                              </ul>
+                          </div>
+                      `;
+                            break;
+                        case "experience":
+                            content.innerHTML = `
+                          <div class="section animate-fade-in">
+                              <h2>Professional Experience</h2>
+                              <ul class="item-list">
+                                  ${experienceData
+                                      .map(
+                                          (exp) => `
+                                      <li>
+                                          <h3>${exp.title}</h3>
+                                          <p><strong>${exp.company}, ${exp.period}</strong></p>
+                                          <p>${exp.description.replace(/\n/g, "<br><br>")}</p>
+                                      </li>
+                                  `
+                                      )
+                                      .join("")}
+                              </ul>
+                          </div>
+                      `;
+                            break;
+                        case "projects":
+                            content.innerHTML = `
+                          <div class="section animate-fade-in">
+                              <h2>Featured Projects</h2>
+                              <ul class="item-list">
+                                  ${projectsData
+                                      .map(
+                                          (project) => `
+                                      <li>
+                                          <h3>${project.title}</h3>
+                                          <p><b>Description : </b>${project.description}</p>
+                                          <p><b>Technologies : </b>${project.technologies}</p>
+                                          <p><b>Role : </b>${project.role}</p>
+                                          <p><b>Roles & Responsibilities: </b></p>
+                                          <p>${project.responsibilities ? project.responsibilities.replace(/\n/g, "<br><br>") : "Not Specified"}</p>
+                                          
+                                      </li>
+                                  `
+                                      )
+                                      .join("")}
+                              </ul>
+                          </div>
+                      `;
+                            break;
+                        case "certificates":
+                            content.innerHTML = `
+                          <div class="section animate-fade-in">
+                              <h2>Certificates & Achievements</h2>
+                              <div class="cert-achieve-grid">
+                                  ${certificatesData
+                                      .map(
+                                          (cert, index) => `
+                                      <div class="cert-achieve-item">
+                                          <i class="fas fa-certificate"></i>
+                                          <h3>${cert.title}</h3>
+                                          <p>${cert.issuer}, ${cert.year}</p>
+                                          <button class="view-certificate" data-index="${index}" data-type="certificate">View Certificate</button>
+                                      </div>
+                                  `
+                                      )
+                                      .join("")}
+                                  ${achievementsData
+                                      .map(
+                                          (achieve, index) => `
+                                      <div class="cert-achieve-item">
+                                          <i class="fas fa-trophy"></i>
+                                          <h3>${achieve.title}</h3>
+                                          <p>${achieve.description}</p>
+                                          <p>${achieve.year}</p>
+                                          <button class="view-certificate" data-index="${index}" data-type="achievement">View Achievement</button>
+                                      </div>
+                                  `
+                                      )
+                                      .join("")}
+                              </div>
+                          </div>
+                          <div id="certificate-modal" class="modal">
+                              <div class="modal-content">
+                                  <span class="close">&times;</span>
+                                  <img id="certificate-image" src="" alt="Certificate or Achievement">
+                              </div>
+                          </div>
+                      `;
+                            setupCertificateButtons();
+                            break;
+                        case "contact":
+                            content.innerHTML = `
+         <div class="section animate-fade-in">
+         <h2>Get in Touch</h2>
+         <p class="section-intro">I'm always open to new opportunities and collaborations. Feel free to reach out using the form below or through my professional channels.</p>
+         
+         <div class="contact-section">
+         <div class="contact-container">
+         <div class="left-contact">
+         <ul class="contact-list">
+             <li>
+                 <i class="fas fa-envelope"></i>
+                 <a href="https://mail.google.com/mail/?view=cm&fs=1&to=${profile_Data.contact.email}" target="_blank">${profile_Data.contact.email}</a>
+             </li><br>
+             <li>
+                 <i class="fas fa-phone"></i>
+                 <span>${profile_Data.contact.phone}</span>
+             </li><br>
+         </ul>
+         </div>
+         <div class="right-contact">
+         <ul class="contact-list">
+             <li>
+                 <i class="fab fa-linkedin"></i>
+                 <a href="${profile_Data.contact.linkedin}" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
+             </li><br>
+             <li>
+                 <i class="fab fa-github"></i>
+                 <a href="${profile_Data.contact.github}" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
+             </li><br>
+         </ul>
+         </div>
+         </div>
+         </div>
+         
+             <div class="contact-form-container">
+         <h3>Send a Message</h3>
+         <form id="contact-form" class="contact-form" action="https://formspree.io/f/manwgdyq" method="POST">
+         <div class="form-group">
+         <label for="name">Name</label>
+         <input type="text" id="name" name="name" required>
+         </div>
+         <div class="form-group">
+         <label for="email">Email</label>
+         <input type="email" id="email" name="email" required>
+         <span id="email-error" class="error-message"></span>
+         </div>
+         <div class="form-group">
+         <label for="subject">Subject</label>
+         <input type="text" id="subject" name="subject" required>
+         </div>
+         <div class="form-group">
+         <label for="message">Message</label>
+         <textarea id="message" name="message" rows="5" required></textarea>
+         </div>
+         <input type="hidden" name="_cc" value="luckykodela7@gmail.com">
+         <button type="submit" class="submit-btn">Send Message</button>
+         </form>
+         </div>
+         </div>
+         </div>
+         `;
+
+                            const form = document.getElementById("contact-form");
+                            const emailInput = document.getElementById("email");
+                            const emailError = document.getElementById("email-error");
+
+                            function isValidEmail(email) {
+                                const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+                                return emailRegex.test(email);
+                            }
+
+                            emailInput.addEventListener("input", function () {
+                                if (this.value && !isValidEmail(this.value)) {
+                                    emailError.textContent = "Please enter a valid email address.";
+                                } else {
+                                    emailError.textContent = "";
+                                }
+                            });
+
+                            form.addEventListener("submit", function (e) {
+                                e.preventDefault();
+
+                                if (!isValidEmail(emailInput.value)) {
+                                    emailError.textContent = "Please enter a valid email address.";
+                                    return;
+                                }
+
+                                const formData = new FormData(form);
+
+                                fetch(form.action, {
+                                    method: "POST",
+                                    body: formData,
+                                    headers: {
+                                        Accept: "application/json",
+                                    },
+                                })
+                                    .then((response) => {
+                                        if (response.ok) {
+                                            alert("Thank you for your message. I will get back to you soon!");
+                                            form.reset();
+                                            emailError.textContent = "";
+                                        } else {
+                                            response
+                                                .json()
+                                                .then((data) => {
+                                                    let errorMessage = "Oops! There was a problem sending your message. ";
+                                                    if (data && data.error) {
+                                                        errorMessage += "Error details: " + data.error;
+                                                    }
+                                                    alert(errorMessage);
+                                                    console.error("Form submission error:", data);
+                                                })
+                                                .catch((error) => {
+                                                    alert("Oops! There was a problem sending your message. Please check the console for more details.");
+                                                    console.error("Error parsing error response:", error);
+                                                });
+                                        }
+                                    })
+                                    .catch((error) => {
+                                        alert("Oops! There was a problem sending your message. Please check the console for more details.");
+                                        console.error("Network error:", error);
+                                    });
+                            });
+
+                            break;
+                    }
+                    content.style.opacity = 1;
+                }, 300);
+            }
+            function toggleMenu() {
+                const navMenu = document.querySelector(".nav-menu");
+                navMenu.classList.toggle("active");
+            }
+
+            // Close menu when a link is clicked
+            document.querySelectorAll(".nav-menu a").forEach((link) => {
+                link.addEventListener("click", () => {
+                    document.querySelector(".nav-menu").classList.remove("active");
+                });
+            });
+            // Load home page by default
+            window.onload = () => {
+                loadContent("home");
+                // Set profile image and name
+                document.getElementById("profile-img").src = profile_Data.image;
+                document.getElementById("profile-name").textContent = profile_Data.name;
+                document.getElementById("profile-title").textContent = profile_Data.title;
+            };
+
+            // Handle form submission
+            document.addEventListener("submit", function (e) {
+                if (e.target && e.target.id === "contact-form") {
+                    e.preventDefault();
+                    alert("Thank you for your message! I will get back to you soon.");
+                    e.target.reset();
+                }
+            });
+
+            // Add interactivity to profile image
+            document.getElementById("profile-img").addEventListener("click", function () {
+                alert(`Hi, I'm ${profile_Data.name}! Welcome to my portfolio. Feel free to explore and get in touch!`);
+            });
+
+            // Shrink header on scroll
+            window.addEventListener("scroll", function () {
+                const header = document.getElementById("main-header");
+                if (window.scrollY > 50) {
+                    header.classList.add("scrolled");
+                } else {
+                    header.classList.remove("scrolled");
+                }
+            });
+
+            // Add smooth scrolling to all links
+            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+                anchor.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute("href")).scrollIntoView({
+                        behavior: "smooth",
+                    });
+                });
+            });
+
+            function setupCertificateButtons() {
+                const modal = document.getElementById("certificate-modal");
+                const modalImg = document.getElementById("certificate-image");
+                const closeBtn = document.getElementsByClassName("close")[0];
+
+                document.querySelectorAll(".view-certificate").forEach((button) => {
+                    button.onclick = function () {
+                        const index = this.getAttribute("data-index");
+                        const type = this.getAttribute("data-type");
+                        const data = type === "certificate" ? certificatesData[index] : achievementsData[index];
+                        modalImg.src = data.imageUrl;
+                        modal.style.display = "block";
+                    };
+                });
+
+                closeBtn.onclick = function () {
+                    modal.style.display = "none";
+                };
+
+                window.onclick = function (event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                };
+            }
+        </script>
+    </body>
+</html>
